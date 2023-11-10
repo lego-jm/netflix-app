@@ -15,7 +15,6 @@ function getMovies() {
       const getUpComingMovies = movieApi.get(
         `/upcoming?api_key=${API_KEY}&language=en-US&page=1`
       );
-
       const [popularMovies, topRatedMovies, upComingMovies] = await Promise.all(
         [getPopularMovies, getTopRatedMovies, getUpComingMovies]
       );
@@ -46,31 +45,35 @@ function getMovieDetail(movieId) {
       const getMovieReview = movieApi.get(
         `/${movieId}/reviews?api_key=${API_KEY}&language=en-US`
       );
-
-      const [movieDetail, movieYoutubeId, movieReview] = await Promise.all([
-        getMovieDetail,
-        getMovieYoutubeId,
-        getMovieReview,
-      ]);
+      const getMovieReletedMovies = movieApi.get(
+        `/${movieId}/recommendations?api_key=${API_KEY}&language=en-US`
+      );
+      const [movieDetail, movieYoutubeId, movieReview, movieRelated] =
+        await Promise.all([
+          getMovieDetail,
+          getMovieYoutubeId,
+          getMovieReview,
+          getMovieReletedMovies,
+        ]);
 
       dispatch(
         movieActions.getMovieDetail({
           movieDetail: movieDetail.data,
           movieYoutubeId: movieYoutubeId.data.results[0].key,
           movieReview: movieReview.data,
+          movieRelated: movieRelated.data,
         })
       );
     } catch (e) {
       throw new Error(`${e.message}`);
     }
   };
-
-  /* function getYoutubeId(movieId) {
-    return async (dispatch) => {
-      const movieYoutubeId = await movieApi.get(
-        `/${movieId}/videos?api_key=${API_KEY}&language=en-US`
-      );
-    };
-  } */
 }
-export const getMovieActions = { getMovies, getMovieDetail };
+
+function setKeyword(keyword) {
+  return (dispatch) => {
+    dispatch(movieActions.setKeyword(keyword));
+  };
+}
+
+export const getMovieActions = { getMovies, getMovieDetail, setKeyword };

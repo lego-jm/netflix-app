@@ -1,14 +1,17 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function MovieCard({
   movie: { backdrop_path, title, vote_average, popularity, id, genre_ids },
 }) {
   const navigate = useNavigate();
+  const { movieId } = useParams();
 
   return (
     <div
-      className="cursor-pointer group transition-all bg-center bg-cover z-50 hover:scale-150"
+      className={`${
+        movieId ? "h-44" : ""
+      } cursor-pointer group transition-all bg-center bg-cover hover:scale-150`}
       style={{
         backgroundImage: `URL('https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/${backdrop_path}')`,
       }}

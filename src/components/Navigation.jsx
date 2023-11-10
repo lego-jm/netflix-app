@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
+import { useDispatch } from "react-redux";
+import { getMovieActions } from "../redux/actions/movieActions";
 
 export default function Navigation() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(getMovieActions.setKeyword(keyword));
+    navigate("/movies");
   };
 
   return (

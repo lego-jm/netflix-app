@@ -6,8 +6,6 @@ import YouTube from "react-youtube";
 
 export default function YoutubeModal({ isModalOpen, setModalOpen }) {
   const { youtubeId } = useSelector((state) => state.movie.movieDetail);
-
-  console.log(youtubeId);
   const customStyle = {
     content: {
       backgroundColor: "#fff",

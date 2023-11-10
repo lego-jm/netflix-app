@@ -8,6 +8,8 @@ const initialState = {
     youtubeId: "",
   },
   movieReview: {},
+  movieRelated: {},
+  keyword: "",
   isLoading: false,
 };
 
@@ -25,11 +27,14 @@ const movieSlice = createSlice({
       state.isLoading = false;
     },
     getMovieDetail(state, action) {
-      console.log(action);
       state.movieDetail = action.payload.movieDetail;
       state.movieDetail.youtubeId = action.payload.movieYoutubeId;
       state.movieReview = action.payload.movieReview;
+      state.movieRelated = action.payload.movieRelated;
       state.isLoading = true;
+    },
+    setKeyword(state, action) {
+      state.keyword = action.payload;
     },
   },
 });

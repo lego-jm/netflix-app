@@ -13,7 +13,7 @@ export default function MovieDetail() {
 
   useEffect(() => {
     dispatch(getMovieActions.getMovieDetail(movieId));
-  }, []);
+  }, [movieId]);
 
   if (!isLoading) {
     return (
