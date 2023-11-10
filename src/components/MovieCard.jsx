@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function MovieCard({
@@ -6,7 +6,6 @@ export default function MovieCard({
 }) {
   const navigate = useNavigate();
 
-  // https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/${backdrop_path}
   return (
     <div
       className="cursor-pointer group transition-all bg-center bg-cover z-50 hover:scale-150"
